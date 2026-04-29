@@ -54,11 +54,12 @@ class JobRequest(BaseModel):
 def build_search_query(user_skills):
     skills = [s.strip() for s in user_skills.split(",") if s.strip()]
 
-    if skills:
-        primary_skill = skills[0]
-        return f"{primary_skill} developer"
-
-    return "software developer"
+    if len(skills) >= 2:
+        return f"{skills[0]} {skills[1]}"
+    elif len(skills) == 1:
+        return skills[0]
+    else:
+        return "software"
 
 
 # -------------------------------
